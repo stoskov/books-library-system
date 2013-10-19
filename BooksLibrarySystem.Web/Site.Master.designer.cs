@@ -19,7 +19,7 @@ namespace BooksLibrarySystem.Web {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-		protected BooksLibrarySystem.Web.Controls.ErrorSuccessNotifier.ErrorSuccessNotifier ErrorSuccessNotifier;
+        protected global::BooksLibrarySystem.Web.Controls.ErrorSuccessNotifier.ErrorSuccessNotifier ErrorSuccessNotifier;
         
         /// <summary>
         /// MainContent control.

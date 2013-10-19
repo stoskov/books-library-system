@@ -17,6 +17,11 @@ namespace BooksLibrarySystem.Data.Migrations
 
 		protected override void Seed(LibrarySystemContext context)
 		{
+			if (context.Categories.Count() > 0)
+			{
+				return;
+			}
+			
 			var rand = new Random();
 
 			var description = new StringBuilder();
@@ -25,14 +30,15 @@ namespace BooksLibrarySystem.Data.Migrations
 				description.Append("Book description test. ");
 			}
 
-			for (int i = 0; i < 7; i++)
+			for (int i = 0; i < 8; i++)
 			{
 				var category = new Category()
 				{
 					Name = "Category No: " + i.ToString() + " <br>"
 				};
 
-				for (int j = 0; j < rand.Next(10, 50); j++)
+				//for (int j = 0; j < rand.Next(10, 50); j++)
+				for (int j = 0; j < i; j++)
 				{
 					var book = new Book()
 					{
@@ -42,19 +48,14 @@ namespace BooksLibrarySystem.Data.Migrations
 						ISBN = "12345678912345678",
 						Title = "Book No: " + j.ToString() + " in category: " + category.Name,
 						WebSite = "http://www.new-test-book-website.com/category"
-					};
-
-					context.Books.Add(book);
+					};	
+				
+					category.Books.Add(book);
 				}
+
+				context.Categories.Add(category);
 			}
-
-			var emptyCategory = new Category()
-			{
-				Name = "Category EMPTY  <br>"
-			};
-
-			context.Categories.Add(emptyCategory);
-
+			
 			context.SaveChanges();
 
 			base.Seed(context);

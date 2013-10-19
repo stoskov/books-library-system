@@ -50,7 +50,7 @@
                             <span class="icon-bar"></span>
                         </button>
 
-                        <a class="brand" runat="server" href="~/">Book Library System</a>
+                        <a class="brand" runat="server" href="~/">Books Library</a>
 
                         <div class="nav-collapse collapse">
                             <asp:LoginView runat="server" ViewStateMode="Disabled">

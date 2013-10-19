@@ -11,16 +11,17 @@ namespace BooksLibrarySystem.Web
 			var allCategories = (from c in this.data.Categories.All().OrderByDescending(c => c.Books.Count)
 								 select new CategoryViewModel
 								 {
+									 CategoryId = c.CategoryId,
 									 Name = c.Name,
 									 TotalBooksCount = c.Books.Count(),
 									 Books = (from b in c.Books
-											  select new BookViewModel
+											  select new BookSummaryViewModel
 											  {
 												  Authors = b.Authors,
 												  BookId = b.BookId,
 												  Title = b.Title
-											  }).Take(5).ToList()
-								 }).Take(15).ToList();
+											  }).Take(50).ToList()
+								 }).Take(90).ToList();
 
 			this.ListViewCategories.DataSource = allCategories;
 			this.DataBind();
