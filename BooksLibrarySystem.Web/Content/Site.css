@@ -115,3 +115,7 @@ ul li {
 .block {
 	display: block;
 }
+
+.search-result.result-item {
+	margin: 10px 0;
+}

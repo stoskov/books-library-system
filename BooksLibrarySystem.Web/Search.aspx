@@ -3,23 +3,28 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 	<div class="row">
 		<div class="span12">
-			<h1>
-				Search Results for Query <i>"
-					<asp:Literal runat="server" Mode="Encode" ID="LiteralQuery"></asp:Literal>" </i>
-				<span>:</span>
-			</h1>
+			<asp:Panel  runat="server" CssClass="input-append" DefaultButton="LinkButtonSearch">
+				<asp:TextBox runat="server" ID="TextBoxSearch" CssClass="span11" placeholder="Search by book title / author / description..."></asp:TextBox>
+				<asp:LinkButton runat="server" CssClass="btn" Text="Search" ID="LinkButtonSearch" OnClick="LinkButtonSearch_Click"></asp:LinkButton>
+			</asp:Panel>
 		</div>
-
-		<div class="span12 search-results">
+		<h4 class="span12">
+			Result:
+		</h4>
+		<div class="span12 search-result">
 			<ul>
-				<asp:Repeater runat="server" ID="RepeaterSearchResult" ItemType="BooksLibrarySystem.Models.Book">
+				<asp:Repeater runat="server" ID="RepeaterSearchResult" ItemType="BooksLibrarySystem.Web.ViewModels.BookSearchViewModel">
 					<ItemTemplate>
-						<li>
-							<a href='BookDetails?id=<%#:Item.BookId %>'>
-								<%#: Item.Title %>
-								<i>by <%#: Item.Authors %></i>
-							</a>
-							<span>(Category: <%#: Item.Category.Name %>)</span>
+						<li class="search-result result-item">
+							<div>
+								<a class="block" href='BookDetails?id=<%#:Item.BookId %>'>
+									Title: <%#: Item.Title %>
+								</a>
+								<a class="block" href='CategoryDetails?id=<%#:Item.CategoryId %>'>
+									Category: <%#: Item.CategoryName %>
+								</a>
+							</div>
+							<span class="muted">Authors: <%#: Item.Authors %></span>
 						</li>
 					</ItemTemplate>
 				</asp:Repeater>
@@ -28,6 +33,6 @@
 	</div>
 
 	<div class="back-link">
-		<a href="/">Back to books</a>
+		<a href="/">Back</a>
 	</div>
 </asp:Content>

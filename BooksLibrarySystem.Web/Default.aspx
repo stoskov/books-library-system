@@ -9,7 +9,7 @@
 			<div class="search-button">
 				<div class="form-search">
 					<asp:Panel runat="server" CssClass="input-append" DefaultButton="LinkButtonSearch">
-						<asp:TextBox runat="server" ID="TextBoxSearch" CssClass="span3 search-query" placeholder="Search by book title / author..."></asp:TextBox>
+						<asp:TextBox runat="server" ID="TextBoxSearch" CssClass="span3 search-query" placeholder="Search by book title / author / description ..."></asp:TextBox>
 						<asp:LinkButton runat="server" CssClass="btn" Text="Search" ID="LinkButtonSearch" OnClick="LinkButtonSearch_Click"></asp:LinkButton>
 					</asp:Panel>
 				</div>
