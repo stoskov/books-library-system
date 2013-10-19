@@ -5,7 +5,7 @@ using BooksLibrarySystem.Models;
 
 namespace BooksLibrarySystem.Web.Admin
 {
-	public partial class EditBooks : LibrarySystemPage
+	public partial class EditBooks : BooksLibrarySystemPage
 	{
 		private const int MaxLabelLength = 20;
 		private const string ShortenLabelSymbols = "...";

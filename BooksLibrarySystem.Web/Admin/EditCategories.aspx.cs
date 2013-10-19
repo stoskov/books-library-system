@@ -5,7 +5,7 @@ using BooksLibrarySystem.Models;
 
 namespace BooksLibrarySystem.Web.Admin
 {
-	public partial class EditCategories : LibrarySystemPage
+	public partial class EditCategories : BooksLibrarySystemPage
 	{
 		private int? currentCategoryId;
 

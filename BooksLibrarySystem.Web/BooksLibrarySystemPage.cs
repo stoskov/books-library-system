@@ -5,18 +5,18 @@ using BooksLibrarySystem.Data.UnitsOfWork;
 
 namespace BooksLibrarySystem.Web
 {
-	public class LibrarySystemPage : Page
+	public class BooksLibrarySystemPage : Page
 	{
 		protected const string ShortenSymbols = "...";
 
 		protected IUowData data;
 		
-		public LibrarySystemPage()
+		public BooksLibrarySystemPage()
 			: this(new UowData())
 		{
 		}
 
-		public LibrarySystemPage(UowData uow)
+		public BooksLibrarySystemPage(UowData uow)
 		{
 			this.data = uow;
 		}

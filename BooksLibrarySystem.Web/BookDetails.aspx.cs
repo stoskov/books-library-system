@@ -5,7 +5,7 @@ using BooksLibrarySystem.Web.ViewModels;
 
 namespace BooksLibrarySystem.Web
 {
-	public partial class BookDetails : LibrarySystemPage
+	public partial class BookDetails : BooksLibrarySystemPage
 	{
 		public BookViewModel Book = new BookViewModel();
 

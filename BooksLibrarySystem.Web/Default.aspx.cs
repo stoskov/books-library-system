@@ -4,7 +4,7 @@ using BooksLibrarySystem.Web.ViewModels;
 
 namespace BooksLibrarySystem.Web
 {
-	public partial class Default : LibrarySystemPage
+	public partial class Default : BooksLibrarySystemPage
 	{
 		protected void Page_PreRender(object sender, EventArgs e)
 		{

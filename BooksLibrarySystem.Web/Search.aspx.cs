@@ -5,7 +5,7 @@ using BooksLibrarySystem.Models;
 
 namespace BooksLibrarySystem.Web
 {
-	public partial class Search : LibrarySystemPage
+	public partial class Search : BooksLibrarySystemPage
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
