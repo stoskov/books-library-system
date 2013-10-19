@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using BooksLibrarySystem.Models;
+using BooksLibrarySystem.Web.ViewModels;
 
 namespace BooksLibrarySystem.Web
 {
 	public partial class BookDetails : LibrarySystemPage
 	{
+		public BookViewModel Book = new BookViewModel();
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			int bookId = Convert.ToInt32(this.Request.Params["id"]);
 
 			Book book = this.data.Books.GetById(bookId);
-			List<Book> booksDataSource = new List<Book>();
-			booksDataSource.Add(book);
 
 			if (book == null)
 			{
@@ -21,8 +21,18 @@ namespace BooksLibrarySystem.Web
 				return;
 			}
 
-			this.RepeaterBookDetails.DataSource = booksDataSource;
-			this.DataBind();
+			var bookViewModel = new BookViewModel()
+			{
+				BookId = book.BookId,
+				Title = book.Title,
+				Authors = book.Authors,
+				ISBN = book.ISBN,
+				CategoryName = book.Category.Name,
+				WebSite = book.WebSite,
+				Description = book.Description
+			};
+
+			this.Book = bookViewModel;
 		}
 	}
 }
