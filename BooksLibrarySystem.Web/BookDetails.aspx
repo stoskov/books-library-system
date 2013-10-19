@@ -31,6 +31,6 @@
 	</div>
 
 	<div class="back-link">
-		<a href="/">Back to books</a>
+		<a href="/">Back</a>
 	</div>
 </asp:Content>

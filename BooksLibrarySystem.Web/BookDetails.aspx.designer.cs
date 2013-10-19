@@ -10,6 +10,6 @@
 namespace BooksLibrarySystem.Web {
     
     
-    public partial class BookDetails {
+    public partial class CategoryDetails {
     }
 }

@@ -299,7 +299,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewModels\BookSummaryViewModel.cs" />
-    <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\CategorySummaryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>

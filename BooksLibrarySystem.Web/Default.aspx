@@ -17,7 +17,7 @@
 		</div>
 	</div>
 
-	<asp:ListView runat="server" ID="ListViewCategories" ItemType="BooksLibrarySystem.Web.ViewModels.CategoryViewModel" GroupItemCount="3">
+	<asp:ListView runat="server" ID="ListViewCategories" ItemType="BooksLibrarySystem.Web.ViewModels.CategorySummaryViewModel" GroupItemCount="3">
 		<LayoutTemplate>
 			<div id="groupPlaceholder" runat="server"></div>
 		</LayoutTemplate>

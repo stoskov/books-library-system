@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace BooksLibrarySystem.Web.ViewModels
 {
-	public class CategoryViewModel
+	public class CategorySummaryViewModel
 	{
 		public int CategoryId { get; set; }
 

@@ -9,7 +9,7 @@ namespace BooksLibrarySystem.Web
 		protected void Page_PreRender(object sender, EventArgs e)
 		{
 			var allCategories = (from c in this.data.Categories.All().OrderByDescending(c => c.Books.Count)
-								 select new CategoryViewModel
+								 select new CategorySummaryViewModel
 								 {
 									 CategoryId = c.CategoryId,
 									 Name = c.Name,
