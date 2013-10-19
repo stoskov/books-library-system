@@ -7,7 +7,9 @@
 		<p class="book-title"><%= this.Book.Title %></p>
 		<p>
 			<strong>Category:</strong>
-			<span class="book-info"> <%= this.Book.CategoryName %></span>
+			<span class="book-info">
+				<a href='CategoryDetails?id=<%= this.Book.Category.CategoryId %>'><%= this.Book.Category.Name %></a>
+			</span>
 		</p>
 		<p>
 			<strong>Authors:</strong>

@@ -1,13 +1,20 @@
 ﻿using System;
 using System.Linq;
 using BooksLibrarySystem.Models;
-using BooksLibrarySystem.Web.ViewModels;
 
 namespace BooksLibrarySystem.Web
 {
 	public partial class BookDetails : BooksLibrarySystemPage
 	{
-		public BookViewModel Book = new BookViewModel();
+		private Book book = new Book();
+
+		public Book Book
+		{
+			get
+			{
+				return this.book;
+			}
+		}
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
@@ -21,18 +28,7 @@ namespace BooksLibrarySystem.Web
 				return;
 			}
 
-			var bookViewModel = new BookViewModel()
-			{
-				BookId = book.BookId,
-				Title = book.Title,
-				Authors = book.Authors,
-				ISBN = book.ISBN,
-				CategoryName = book.Category.Name,
-				WebSite = book.WebSite,
-				Description = book.Description
-			};
-
-			this.Book = bookViewModel;
+			this.book = book;
 		}
 	}
 }
