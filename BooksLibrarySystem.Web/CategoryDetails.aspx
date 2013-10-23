@@ -17,23 +17,23 @@
 			<asp:TemplateField SortExpression="Title" HeaderText="Title">
 				<ItemTemplate>
 					<a class="block" href='BookDetails?id=<%#:Item.BookId %>'>
-					<%#:  this.ShortenText(Item.Title, 100) %>
+					<%#:  Item.Title %>
 					</a>
 				</ItemTemplate>
 			</asp:TemplateField>
 			<asp:TemplateField SortExpression="Authors" HeaderText="Authors">
 				<ItemTemplate>
-					<asp:Label runat="server" Text='<%#: this.ShortenText(Item.Authors, 50) %>'></asp:Label>
+					<asp:Label runat="server" Text='<%#: Item.Authors %>'></asp:Label>
 				</ItemTemplate>
 			</asp:TemplateField>
 			<asp:TemplateField SortExpression="ISBN" HeaderText="ISBN">
 				<ItemTemplate>
-					<asp:Label runat="server" Text='<%#: this.ShortenText(Item.ISBN, 50) %>'></asp:Label>
+					<asp:Label runat="server" Text='<%#: Item.ISBN %>'></asp:Label>
 				</ItemTemplate>
 			</asp:TemplateField>
 			<asp:TemplateField SortExpression="WebSite" HeaderText="Web Site">
 				<ItemTemplate>
-					<asp:HyperLink runat="server" NavigateUrl='<%#: Item.WebSite %>' Text='<%#: this.ShortenText(Item.WebSite, 50) %>'></asp:HyperLink>
+					<asp:HyperLink runat="server" NavigateUrl='<%#: Item.WebSite %>' Text='<%#: Item.WebSite%>'></asp:HyperLink>
 				</ItemTemplate>
 			</asp:TemplateField>
 		</Columns>
