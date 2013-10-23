@@ -4,10 +4,10 @@
 	<h2>Category Details</h2>
 
 	<header>
-		<p class="category-name"><%= this.Category.Name %></p>
+		<p class="category-name"><%: this.Category.Name %></p>
 		<p>
 			<strong>Total Books:</strong>
-			<span class="category-info"> <%= this.Category.Books.Count() %></span>
+			<span class="category-info"> <%: this.Category.Books.Count() %></span>
 		</p>
 	</header>
 	<asp:GridView ID="GridViewBooks" runat="server" ItemType="BooksLibrarySystem.Models.Book" CssClass="gridview"

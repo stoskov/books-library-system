@@ -9,7 +9,7 @@
 			</asp:Panel>
 		</div>
 		<h4 class="span12">
-			Result (<%= this.ResultCount %>):
+			Result (<%: this.ResultCount %>):
 		</h4>
 		<div class="span12 search-result">
 

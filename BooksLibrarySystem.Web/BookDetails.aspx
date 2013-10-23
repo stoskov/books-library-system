@@ -4,31 +4,31 @@
 	<h2>Book Details</h2>
 
 	<header>
-		<p class="book-title"><%= this.Book.Title %></p>
+		<p class="book-title"><%: this.Book.Title %></p>
 		<p>
 			<strong>Category:</strong>
 			<span class="book-info">
-				<a href='CategoryDetails?id=<%= this.Book.Category.CategoryId %>'><%= this.Book.Category.Name %></a>
+				<a href='CategoryDetails?id=<%: this.Book.Category.CategoryId %>'><%: this.Book.Category.Name %></a>
 			</span>
 		</p>
 		<p>
 			<strong>Authors:</strong>
-			<span class="book-info"> <%= this.Book.Authors %></span>
+			<span class="book-info"> <%: this.Book.Authors %></span>
 		</p>
 		<p>
 			<strong>ISBN:</strong>
-			<span class="book-info"> <%= this.Book.ISBN %></span>
+			<span class="book-info"> <%: this.Book.ISBN %></span>
 		</p>
 		<p>
 			<strong>Web site:</strong>
 			<span class="book-info">
-				<a href="<%# Book.WebSite %>"><%= this.Book.WebSite %></a>
+				<a href="<%# Book.WebSite %>"><%: this.Book.WebSite %></a>
 			</span>
 		</p>
 	</header>
 	<div class="row-fluid">
 		<div class="span12 book-description">
-			<p><%= this.Book.Description  %></p>
+			<p><%: this.Book.Description  %></p>
 		</div>
 	</div>
 
