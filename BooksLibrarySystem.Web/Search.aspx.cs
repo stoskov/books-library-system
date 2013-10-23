@@ -8,6 +8,8 @@ namespace BooksLibrarySystem.Web
 {
 	public partial class Search : BooksLibrarySystemPage
 	{
+		public int ResultCount { get; set; }
+
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			string query = this.Request.Params["q"];
@@ -23,7 +25,8 @@ namespace BooksLibrarySystem.Web
 			}
 
 			var books = this.GetSearchResult(query);
-			this.RepeaterSearchResult.DataSource = books;
+			this.ResultCount = books.Count();
+			this.ResultView.DataSource = books;
 			this.DataBind();
 		}
 

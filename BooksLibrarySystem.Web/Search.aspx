@@ -9,29 +9,55 @@
 			</asp:Panel>
 		</div>
 		<h4 class="span12">
-			Result:
+			Result (<%= this.ResultCount %>):
 		</h4>
 		<div class="span12 search-result">
-			<ul>
-				<asp:Repeater runat="server" ID="RepeaterSearchResult" ItemType="BooksLibrarySystem.Web.ViewModels.BookSearchViewModel">
-					<ItemTemplate>
-						<li class="search-result result-item">
-							<div>
-								<a class="block" href='BookDetails?id=<%#:Item.BookId %>'>
-									Title: <%#: Item.Title %>
-								</a>
-								<a class="block" href='CategoryDetails?id=<%#:Item.CategoryId %>'>
-									Category: <%#: Item.CategoryName %>
-								</a>
-							</div>
-							<span class="muted">Authors: <%#: Item.Authors %></span>
-						</li>
-					</ItemTemplate>
-				</asp:Repeater>
-			</ul>
+
+			<asp:ListView runat="server" ID="ResultView" ItemType="BooksLibrarySystem.Web.ViewModels.BookSearchViewModel">
+				<LayoutTemplate>
+					<ul>
+						<div runat="server" id="itemPlaceHolder"></div>
+					</ul>
+				</LayoutTemplate>
+				<ItemTemplate>
+					<li class="search-result result-item">
+						<div>
+							<a class="block" href='BookDetails?id=<%#:Item.BookId %>'>
+								Title: <%#: Item.Title %>
+							</a>
+							<a class="block" href='CategoryDetails?id=<%#:Item.CategoryId %>'>
+								Category: <%#: Item.CategoryName %>
+							</a>
+						</div>
+						<span class="muted">Authors: <%#: Item.Authors %></span>
+					</li>
+				</ItemTemplate>
+			</asp:ListView>
+
 		</div>
+
 	</div>
 
+	<hr />
+
+	<div class="btn-group">
+		<asp:DataPager runat="server" PagedControlID="ResultView" PageSize="10" QueryStringField="page">
+			<Fields>
+				<asp:NextPreviousPagerField 
+					FirstPageText="<<"
+					LastPageText=">>"
+					PreviousPageText="<"
+					NextPageText=">"
+					ButtonCssClass="btn"
+					ButtonType="Button"
+					ShowFirstPageButton="true"
+					ShowLastPageButton="true"
+					ShowPreviousPageButton="true"
+					ShowNextPageButton="true"/>
+
+			</Fields>
+		</asp:DataPager>
+	</div>
 	<div class="back-link">
 		<a href="/">Back</a>
 	</div>
