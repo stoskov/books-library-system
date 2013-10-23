@@ -5,7 +5,7 @@ using BooksLibrarySystem.Models;
 
 namespace BooksLibrarySystem.Web.Admin
 {
-	public partial class EditBooks : BooksLibrarySystemPage
+	public partial class Books : BooksLibrarySystemPage
 	{
 		private const int MaxLabelLength = 20;
 		private const string ShortenLabelSymbols = "...";
@@ -15,6 +15,7 @@ namespace BooksLibrarySystem.Web.Admin
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			this.currentBookId = (int?)this.ViewState["currentBookId"];
+			this.HideUnauthorizedWidgets();
 		}
 
 		protected void Page_PreRender(object sender, EventArgs e)
@@ -118,19 +119,18 @@ namespace BooksLibrarySystem.Web.Admin
 			this.CloseAllModes();
 		}
 
-		protected string ShortenText(string text)
+		private void HideUnauthorizedWidgets()
 		{
-			if (string.IsNullOrEmpty(text))
+			if (this.Context.User.Identity.IsAuthenticated)
 			{
-				return text;
+				this.GridViewBooks.Columns[5].Visible = true;
+				this.LinkButtonCreateNew.Visible = true;
 			}
-
-			if (text.Length > MaxLabelLength)
+			else
 			{
-				return text.Substring(0, MaxLabelLength - ShortenLabelSymbols.Length) + ShortenLabelSymbols;
+				this.GridViewBooks.Columns[5].Visible = false;
+				this.LinkButtonCreateNew.Visible = false;
 			}
-
-			return text;
 		}
 
 		private void OpenCreateMode()

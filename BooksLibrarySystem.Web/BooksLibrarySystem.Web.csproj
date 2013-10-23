@@ -153,7 +153,7 @@
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
-    <Content Include="EditBooks.aspx" />
+    <Content Include="Books.aspx" />
     <Content Include="BookDetails.aspx" />
     <Content Include="CategoryDetails.aspx" />
     <Content Include="Content\bootstrap-responsive.css" />
@@ -247,12 +247,12 @@
     <Compile Include="Account\RegisterExternalLogin.aspx.designer.cs">
       <DependentUpon>RegisterExternalLogin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="EditBooks.aspx.cs">
-      <DependentUpon>EditBooks.aspx</DependentUpon>
+    <Compile Include="Books.aspx.cs">
+      <DependentUpon>Books.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="EditBooks.aspx.designer.cs">
-      <DependentUpon>EditBooks.aspx</DependentUpon>
+    <Compile Include="Books.aspx.designer.cs">
+      <DependentUpon>Books.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />

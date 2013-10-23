@@ -10,7 +10,7 @@
 namespace BooksLibrarySystem.Web.Admin {
     
     
-    public partial class EditBooks {
+    public partial class Books {
         
         /// <summary>
         /// GridViewBooks control.
