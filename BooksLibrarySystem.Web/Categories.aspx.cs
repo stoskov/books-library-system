@@ -3,15 +3,16 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using BooksLibrarySystem.Models;
 
-namespace BooksLibrarySystem.Web.Admin
+namespace BooksLibrarySystem.Web
 {
-	public partial class EditCategories : BooksLibrarySystemPage
+	public partial class Categories : BooksLibrarySystemPage
 	{
 		private int? currentCategoryId;
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
 			this.currentCategoryId = (int?)this.ViewState["currentCategoryId"];
+			this.HideUnauthorizedWidgets();
 		}
 
 		protected void Page_PreRender(object sender, EventArgs e)
@@ -87,6 +88,20 @@ namespace BooksLibrarySystem.Web.Admin
 		protected void LinkButtonCancel_Click(object sender, EventArgs e)
 		{
 			this.CloseAllModes();
+		}
+
+		private void HideUnauthorizedWidgets()
+		{
+			if (this.Context.User.Identity.IsAuthenticated)
+			{
+				this.GridViewCategories.Columns[1].Visible = true;
+				this.LinkButtonCreateNew.Visible = true;
+			}
+			else
+			{
+				this.GridViewCategories.Columns[1].Visible = false;
+				this.LinkButtonCreateNew.Visible = false;
+			}
 		}
 
 		private void OpenCreateMode()

@@ -6,11 +6,9 @@
 //     the code is regenerated. 
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-namespace BooksLibrarySystem.Web.Admin {
-    
-    
-    public partial class EditCategories {
+namespace BooksLibrarySystem.Web
+{
+	public partial class Categories {
         
         /// <summary>
         /// GridViewCategories control.
