@@ -3,13 +3,13 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 	<div class="row">
 		<div class="span12">
-			<h1>Edit Categories</h1>
+			<h2>Edit Categories</h2>
 		</div>
 
 		<div class="span12">
 
 			<asp:GridView ID="GridViewCategories" runat="server" ItemType="BooksLibrarySystem.Models.Category" CssClass="gridview"
-						  AutoGenerateColumns="False" DataKeyNames="CategoryId" PageSize="15" AllowPaging="true" AllowSorting="true"
+						  AutoGenerateColumns="False" DataKeyNames="CategoryId" PageSize="10" AllowPaging="true" AllowSorting="true"
 						  SelectMethod="GridViewCategories_GetData">
 				<Columns>
 					<asp:TemplateField HeaderText="Category Name">

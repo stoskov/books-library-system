@@ -3,13 +3,13 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 	<div class="row">
 		<div class="span12">
-			<h1>Edit Books</h1>
+			<h2>Edit Books</h2>
 		</div>
 
 		<div class="span12">
 
 			<asp:GridView ID="GridViewBooks" runat="server" ItemType="BooksLibrarySystem.Models.Book" CssClass="gridview"
-						  AutoGenerateColumns="False" DataKeyNames="BookId" PageSize="15" AllowPaging="true" AllowSorting="true"
+						  AutoGenerateColumns="False" DataKeyNames="BookId" PageSize="10" AllowPaging="true" AllowSorting="true"
 						  SelectMethod="GridViewBooks_GetData">
 				<Columns>
 					<asp:TemplateField SortExpression="Title" HeaderText="Title">
