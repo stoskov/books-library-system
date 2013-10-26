@@ -19,7 +19,8 @@ namespace BooksLibrarySystem.Web.Account
 			if (result.Success) 
 			{
 				manager.Authentication.SignIn(this.Context.GetOwinContext().Authentication, u.Id, isPersistent: false);
-				BooksLibrarySystem.Web.Account.OpenAuthProviders.RedirectToReturnUrl(this.Request.QueryString["ReturnUrl"], this.Response);
+				this.Response.Redirect(this.Request.QueryString["ReturnUrl"], false);
+				//BooksLibrarySystem.Web.Account.OpenAuthProviders.RedirectToReturnUrl(this.Request.QueryString["ReturnUrl"], this.Response);
 			}
 			else 
 			{

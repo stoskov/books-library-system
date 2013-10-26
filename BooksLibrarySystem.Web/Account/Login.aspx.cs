@@ -30,7 +30,8 @@ namespace BooksLibrarySystem.Web.Account
 				IdentityResult result = manager.CheckPasswordAndSignIn(this.Context.GetOwinContext().Authentication, this.UserName.Text, this.Password.Text, this.RememberMe.Checked);
 				if (result.Success)
 				{
-					OpenAuthProviders.RedirectToReturnUrl(this.Request.QueryString["ReturnUrl"], this.Response);
+					this.Response.Redirect(this.Request.QueryString["ReturnUrl"], false);
+					//OpenAuthProviders.RedirectToReturnUrl(this.Request.QueryString["ReturnUrl"], this.Response);
 				}
 				else
 				{

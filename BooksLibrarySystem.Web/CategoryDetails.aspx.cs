@@ -18,7 +18,7 @@ namespace BooksLibrarySystem.Web
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			int categoryId = Convert.ToInt32(this.Request.Params["id"]);
+			int categoryId = Convert.ToInt32(this.Request.QueryString["id"]);
 
 			Category category = this.data.Categories.GetById(categoryId);
 

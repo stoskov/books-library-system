@@ -8,7 +8,7 @@
 	<head runat="server">
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title><%: Page.Title %> - My ASP.NET Application</title>
+		<title><%: this.Page.Title %> - My ASP.NET Application</title>
 
 		<asp:PlaceHolder runat="server">
 		<%: Scripts.Render("~/bundles/modernizr") %>
@@ -53,18 +53,18 @@
 							<a class="brand" runat="server" href="~/">Books Library</a>
 							<ul class="nav nav-pills nav-stacked">
 								<li>
-									<a id="A1"  runat="server" href="~/Search">Search</a>
+									<a runat="server" href="~/Search">Search</a>
 								</li>
 								<li>
-									<a id="A2"  runat="server" href="~/Categories">Categories</a>
+									<a runat="server" href="~/Categories">Categories</a>
 								</li>
 								<li>
-									<a id="A3"  runat="server" href="~/Books">Books</a>
+									<a runat="server" href="~/Books">Books</a>
 								</li>
 							</ul>
 
 							<div class="nav-collapse collapse">
-								<asp:LoginView runat="server" ViewStateMode="Disabled">
+								<asp:LoginView ID="LoginView" runat="server" ViewStateMode="Disabled">
 									<AnonymousTemplate>
 										<ul class="nav nav-pills nav-stacked pull-right">
 											<li class="navbar-text">
@@ -78,7 +78,7 @@
 									<LoggedInTemplate>
 										<ul class="nav nav-pills nav-stacked pull-right">
 											<li class="navbar-text">
-												<a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a>
+												<a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: this.Context.User.Identity.GetUserName()  %> !</a>
 											</li>
 											<li class="navbar-text">
 												<asp:LoginStatus runat="server" LogoutText="Log off"  OnLoggingOut="Unnamed_LoggingOut" />

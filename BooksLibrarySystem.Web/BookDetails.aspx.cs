@@ -18,7 +18,7 @@ namespace BooksLibrarySystem.Web
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			int bookId = Convert.ToInt32(this.Request.Params["id"]);
+			int bookId = Convert.ToInt32(this.Request.QueryString["id"]);
 
 			Book book = this.data.Books.GetById(bookId);
 

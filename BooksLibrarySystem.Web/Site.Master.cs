@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace BooksLibrarySystem.Web
@@ -65,6 +66,17 @@ namespace BooksLibrarySystem.Web
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
+			var loginLink = (HtmlAnchor)this.LoginView.Controls[0].FindControl("loginLink");      
+			if (loginLink != null)
+			{
+				loginLink.HRef += "?ReturnUrl=" + HttpUtility.UrlEncode(this.Request.Url.AbsoluteUri);
+			}
+
+			var registerLink = (HtmlAnchor)this.LoginView.Controls[0].FindControl("registerLink");
+			if (registerLink != null)
+			{
+				registerLink.HRef += "?ReturnUrl=" + HttpUtility.UrlEncode(this.Request.Url.AbsoluteUri);
+			}
 		}
 
 		protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
