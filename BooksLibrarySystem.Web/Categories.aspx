@@ -1,9 +1,9 @@
-﻿<%@ Page Title="Edit Categories" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Categories.aspx.cs" Inherits="BooksLibrarySystem.Web.Categories" %>
+﻿<%@ Page Title="Categories" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Categories.aspx.cs" Inherits="BooksLibrarySystem.Web.Categories" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 	<div class="row">
 		<div class="span12">
-			<h2>Edit Categories</h2>
+			<h2>Categories</h2>
 		</div>
 
 		<div class="span12">
@@ -18,7 +18,7 @@
 						</ItemTemplate>
 					</asp:TemplateField>
 					<asp:TemplateField HeaderText="Action">
-						<ItemStyle CssClass="actions" />
+						<ItemStyle CssClass="actions-column" />
 						<ItemTemplate>
 							<asp:LinkButton ID="LinkButtonEditCategory" runat="server" Text="Edit" CssClass="link-button"
 											OnCommand="LinkButtonEditCategory_Command" CommandName="EditCategory" CommandArgument="<%# Item.CategoryId %>" />
@@ -28,7 +28,7 @@
 					</asp:TemplateField>
 				</Columns>
 			</asp:GridView>
-			
+
 			<div class="create-link">
 				<asp:LinkButton runat="server" CssClass="link-button" ID="LinkButtonCreateNew" Text="Create New" OnClick="LinkButtonCreateNew_Click"></asp:LinkButton>
 			</div>

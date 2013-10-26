@@ -1,9 +1,9 @@
-﻿<%@ Page Title="Edit Books" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Books.aspx.cs" Inherits="BooksLibrarySystem.Web.Admin.Books" %>
+﻿<%@ Page Title="Books" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Books.aspx.cs" Inherits="BooksLibrarySystem.Web.Admin.Books" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 	<div class="row">
 		<div class="span12">
-			<h2>Edit Books</h2>
+			<h2>Books</h2>
 		</div>
 
 		<div class="span12">
@@ -24,22 +24,13 @@
 							<asp:Label runat="server" Text='<%#: Item.Authors %>'></asp:Label>
 						</ItemTemplate>
 					</asp:TemplateField>
-					<asp:TemplateField SortExpression="ISBN" HeaderText="ISBN">
-						<ItemTemplate>
-							<asp:Label runat="server" Text='<%#: Item.ISBN %>'></asp:Label>
-						</ItemTemplate>
-					</asp:TemplateField>
-					<asp:TemplateField SortExpression="WebSite" HeaderText="Web Site">
-						<ItemTemplate>
-							<asp:HyperLink runat="server" NavigateUrl='<%#: Item.WebSite %>' Text='<%#: Item.WebSite %>'></asp:HyperLink>
-						</ItemTemplate>
-					</asp:TemplateField>
 					<asp:TemplateField HeaderText="Category">
 						<ItemTemplate>
 							<a href='CategoryDetails?id=<%#: Item.Category.CategoryId %>'><%#:  Item.Category.Name %></a>
 						</ItemTemplate>
 					</asp:TemplateField>
 					<asp:TemplateField HeaderText="Action">
+						<ItemStyle CssClass="actions-column" />
 						<ItemTemplate>
 							<asp:LinkButton ID="LinkButtonEditBook" runat="server" Text="Edit" CssClass="link-button"
 											OnCommand="LinkButtonEditBook_Command" CommandName="EditBook" CommandArgument="<%# Item.BookId %>" />

@@ -123,12 +123,12 @@ namespace BooksLibrarySystem.Web.Admin
 		{
 			if (this.Context.User.Identity.IsAuthenticated)
 			{
-				this.GridViewBooks.Columns[5].Visible = true;
+				this.GridViewBooks.Columns[3].Visible = true;
 				this.LinkButtonCreateNew.Visible = true;
 			}
 			else
 			{
-				this.GridViewBooks.Columns[5].Visible = false;
+				this.GridViewBooks.Columns[3].Visible = false;
 				this.LinkButtonCreateNew.Visible = false;
 			}
 		}

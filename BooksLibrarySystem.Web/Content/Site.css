@@ -119,3 +119,7 @@ ul li {
 .search-result.result-item {
 	margin: 10px 0;
 }
+
+.actions-column {
+	width: 110px;
+}
