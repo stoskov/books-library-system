@@ -33,31 +33,34 @@
 				<asp:LinkButton runat="server" CssClass="link-button" ID="LinkButtonCreateNew" Text="Create New" OnClick="LinkButtonCreateNew_Click"></asp:LinkButton>
 			</div>
 
-			<asp:Panel runat="server" ID="PanelCreate" CssClass="panel" Visible="false">
+			<asp:Panel runat="server" ID="PanelCreate" CssClass="panel row-fluid" Visible="false">
 				<h2>Create New Category</h2>
-				<label>
-					Category:
-					<asp:TextBox runat="server" ID="TextBoxCategoryCreate" placeholder="Enter category name..."></asp:TextBox>
+				<asp:TextBox runat="server" ID="TextBox1" CssClass="span11" placeholder="Enter category name..." Text="<%#:  %>"></asp:TextBox>
+				<label class="">
+					<span>Category</span>
+					<asp:TextBox runat="server" ID="TextBoxCategoryCreate" CssClass="span11" placeholder="Enter category name..."></asp:TextBox>
 				</label>
-				<asp:LinkButton runat="server" ID="LinkButtonCreate" CssClass="link-button" Text="Create" OnClick="LinkButtonCreate_Click"></asp:LinkButton>
-				<asp:LinkButton runat="server" ID="LinkButtonCancelCreate" CssClass="link-button" Text="Cancel" OnClick="LinkButtonCancel_Click"></asp:LinkButton>
+				<div class="pull-right">
+					<asp:LinkButton runat="server" ID="LinkButtonCreate" CssClass="link-button" Text="Create" OnClick="LinkButtonCreate_Click"></asp:LinkButton>
+					<asp:LinkButton runat="server" ID="LinkButtonCancelCreate" CssClass="link-button" Text="Cancel" OnClick="LinkButtonCancel_Click"></asp:LinkButton>
+				</div>
 			</asp:Panel>
 
-			<asp:Panel runat="server" ID="PanelDelete" CssClass="panel" Visible="false">
+			<asp:Panel runat="server" ID="PanelDelete" CssClass="panel row-fluid" Visible="false">
 				<h2>Confirm Category Deletion?</h2>
 				<label>
-					Category:
-					<asp:TextBox runat="server" ID="TextBoxCategoryDelete" ReadOnly="true"></asp:TextBox>
+					<span>Category</span>
+					<asp:TextBox runat="server" ID="TextBoxCategoryDelete" CssClass="span11" ReadOnly="true"></asp:TextBox>
 				</label>
 				<asp:LinkButton runat="server" ID="LinkButtonDelete" CssClass="link-button" Text="Yes" OnClick="LinkButtonDelete_Click"></asp:LinkButton>
 				<asp:LinkButton runat="server" ID="LinkButtonCancelDelete" CssClass="link-button" Text="No" OnClick="LinkButtonCancel_Click"></asp:LinkButton>
 			</asp:Panel>
 
-			<asp:Panel runat="server" ID="PanelEdit" CssClass="panel" Visible="false">
+			<asp:Panel runat="server" ID="PanelEdit" CssClass="panel row-fluid" Visible="false">
 				<h2>Edit Category</h2>
 				<label>
-					Category:
-					<asp:TextBox runat="server" ID="TextBoxCategoryEdit" placeholder="Enter category name..."></asp:TextBox>
+					<span>Category</span>
+					<asp:TextBox runat="server" ID="TextBoxCategoryEdit" CssClass="span11" placeholder="Enter category name..."></asp:TextBox>
 				</label>
 				<asp:LinkButton runat="server" ID="LinkButtonEdit" CssClass="link-button" Text="Save" OnClick="LinkButtonEdit_Click"></asp:LinkButton>
 				<asp:LinkButton runat="server" ID="LinkButtonCancelEdit" CssClass="link-button" Text="Cancel" OnClick="LinkButtonCancel_Click"></asp:LinkButton>

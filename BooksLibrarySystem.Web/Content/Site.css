@@ -76,6 +76,7 @@ ul li {
 	border-width: 1px;
 	border-color: #BBB;
 	border-radius: 6px;
+	box-sizing: border-box;
 }
 
 .panel h2 {
