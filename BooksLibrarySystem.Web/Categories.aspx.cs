@@ -1,28 +1,35 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
+using System.Web.ModelBinding;
 using System.Web.UI.WebControls;
 using BooksLibrarySystem.Models;
+using BooksLibrarySystem.Web.Controls.ErrorSuccessNotifier;
 
 namespace BooksLibrarySystem.Web
 {
 	public partial class Categories : BooksLibrarySystemPage
 	{
-		private int? currentCategoryId;
+		private const string MessageCategoryUpdated = "Category successfully updated";
+		private const string MessageCategoryCreated = "Category successfully created";
+		private const string MessageCategoryDeleted = "Category successfully deleted";
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			this.currentCategoryId = (int?)this.ViewState["currentCategoryId"];
 			this.HideUnauthorizedWidgets();
 		}
 
 		protected void Page_PreRender(object sender, EventArgs e)
 		{
-			this.DataBind();
+			if (this.IsFormValid())
+			{
+				this.DataBind();
+			}
 		}
 
 		public IQueryable<Category> GridViewCategories_GetData()
 		{
-			return this.data.Categories.All();
+			return this.data.Categories.All().AsQueryable();
 		}
 
 		protected void LinkButtonCreateNew_Click(object sender, EventArgs e)
@@ -30,21 +37,69 @@ namespace BooksLibrarySystem.Web
 			this.OpenCreateMode();
 		}
 
-		protected void LinkButtonCreate_Click(object sender, EventArgs e)
+		public Category FormViewCategory_GetItem([ViewState("currentCategoryId")]
+			int? id)
 		{
-			string categoryName = this.TextBoxCategoryCreate.Text;
-			if (this.ValidateCategoryName(categoryName))
+			if (id == null)
 			{
-				Category category = new Category()
-				{
-					Name = categoryName
-				};
-
-				this.data.Categories.Add(category);
-				this.data.SaveChanges();
-
-				this.CloseAllModes();
+				return null;
 			}
+
+			return this.data.Categories.GetById((int)id);
+		}
+
+		public void FormViewCategory_DeleteItem([ViewState("currentCategoryId")]
+			int id)
+		{
+			this.data.Categories.Delete(id);
+			this.data.SaveChanges();
+			this.CloseForm();
+			ErrorSuccessNotifier.AddSuccessMessage(MessageCategoryDeleted);
+		}
+
+		public void FormViewCategory_UpdateItem([ViewState("currentCategoryId")]
+			int id)
+		{
+			var category = this.data.Categories.GetById(id);
+			this.TryUpdateModel(category);
+
+			if (!this.ModelState.IsValid)
+			{
+				this.SetFormValidity(false);
+				this.DisplayErrorMessage();
+				return;
+			}
+			else
+			{
+				this.SetFormValidity(true);
+			}
+
+			this.data.Categories.Update(category);
+			this.data.SaveChanges();
+			this.CloseForm();
+			ErrorSuccessNotifier.AddSuccessMessage(MessageCategoryUpdated);
+		}
+
+		public void FormViewCategory_InsertItem()
+		{
+			var category = new Category();
+			this.TryUpdateModel(category);
+
+			if (!this.ModelState.IsValid)
+			{
+				this.SetFormValidity(false);
+				this.DisplayErrorMessage();
+				return;
+			}
+			else
+			{
+				this.SetFormValidity(true);
+			}
+
+			this.data.Categories.Add(category);
+			this.data.SaveChanges();
+			this.CloseForm();
+			ErrorSuccessNotifier.AddSuccessMessage(MessageCategoryCreated);
 		}
 
 		protected void LinkButtonEditCategory_Command(object sender, CommandEventArgs e)
@@ -54,40 +109,37 @@ namespace BooksLibrarySystem.Web
 			this.OpenEditMode();
 		}
 
-		protected void LinkButtonEdit_Click(object sender, EventArgs e)
-		{
-			string categoryName = this.TextBoxCategoryEdit.Text;
-
-			if (this.ValidateCategoryName(categoryName))
-			{
-				Category category = this.data.Categories.GetById((int)this.currentCategoryId);
-				category.Name = categoryName;
-
-				this.data.Categories.Update(category);
-				this.data.SaveChanges();
-
-				this.CloseAllModes();
-			}
-		}
-
 		protected void LinkButtonDeleteCategory_Command(object sender, CommandEventArgs e)
 		{
 			int categoryId = Convert.ToInt32(e.CommandArgument);
 			this.SetCategoryId(categoryId);
-			this.OpenDeleteMode();
+			this.OpenReadMode();
 		}
 
-		protected void LinkButtonDelete_Click(object sender, EventArgs e)
+		protected void FormView_Command(object sender, CommandEventArgs e)
 		{
-			this.data.Categories.Delete((int)this.currentCategoryId);
-			this.data.SaveChanges();
-
-			this.CloseAllModes();
+			this.CloseForm();
 		}
 
-		protected void LinkButtonCancel_Click(object sender, EventArgs e)
+		private void SetCategoryId(int id)
 		{
-			this.CloseAllModes();
+			this.ViewState["currentCategoryId"] = id;
+		}
+
+		private void SetFormValidity(bool isValid)
+		{
+			this.ViewState["isFormValid"] = isValid;
+		}
+
+		private bool IsFormValid()
+		{
+			var isValid = this.ViewState["isFormValid"];
+			if (isValid != null && (bool)isValid == false)
+			{
+				return false;
+			}
+
+			return true;
 		}
 
 		private void HideUnauthorizedWidgets()
@@ -106,67 +158,38 @@ namespace BooksLibrarySystem.Web
 
 		private void OpenCreateMode()
 		{
-			this.LinkButtonCreateNew.Visible = false;
-			this.PanelCreate.Visible = true;
-			this.PanelDelete.Visible = false;
-			this.PanelEdit.Visible = false;
+			this.FormViewCategory.Visible = true;
+			this.FormViewCategory.ChangeMode(FormViewMode.Insert);
 		}
 
-		private void OpenDeleteMode()
+		private void OpenReadMode()
 		{
-			this.LinkButtonCreateNew.Visible = false;
-			this.PanelCreate.Visible = false;
-			this.PanelDelete.Visible = true;
-			this.PanelEdit.Visible = false;
-			this.PopulateCategoryName();
+			this.FormViewCategory.Visible = true;
+			this.FormViewCategory.ChangeMode(FormViewMode.ReadOnly);
 		}
 
 		private void OpenEditMode()
 		{
-			this.LinkButtonCreateNew.Visible = false;
-			this.PanelCreate.Visible = false;
-			this.PanelDelete.Visible = false;
-			this.PanelEdit.Visible = true;
-			this.PopulateCategoryName();
+			this.FormViewCategory.Visible = true;
+			this.FormViewCategory.ChangeMode(FormViewMode.Edit);
 		}
 
-		private void CloseAllModes()
+		private void CloseForm()
 		{
-			this.LinkButtonCreateNew.Visible = true;
-			this.PanelCreate.Visible = false;
-			this.PanelDelete.Visible = false;
-			this.PanelEdit.Visible = false;
-			this.TextBoxCategoryCreate.Text = string.Empty;
-			this.TextBoxCategoryEdit.Text = string.Empty;
-			this.TextBoxCategoryDelete.Text = string.Empty;
+			this.FormViewCategory.Visible = false;
 		}
 
-		private void PopulateCategoryName()
+		private void DisplayErrorMessage()
 		{
-			if (this.currentCategoryId != null)
-			{
-				Category category = this.data.Categories.GetById((int)this.currentCategoryId);
-				string categoryName = category.Name;
-				this.TextBoxCategoryEdit.Text = categoryName;
-				this.TextBoxCategoryDelete.Text = categoryName;
-			}
-		}
+			var errorList = this.ModelState.Values
+								.SelectMany(m => m.Errors)
+								.Select(e => e.ErrorMessage)
+								.ToList();
 
-		private void SetCategoryId(int id)
-		{
-			this.currentCategoryId = id;
-			this.ViewState["currentCategoryId"] = id;
-		}
+			var errors = new StringBuilder();
+			errorList.ForEach(err => errors.AppendLine(err.ToString()));
 
-		private bool ValidateCategoryName(string categoryName)
-		{
-			if (string.IsNullOrEmpty(categoryName))
-			{
-				BooksLibrarySystem.Web.Controls.ErrorSuccessNotifier.ErrorSuccessNotifier.AddErrorMessage("Category name can not be empty");
-				return false;
-			}
-
-			return true;
+			ErrorSuccessNotifier.AddErrorMessage(errors.ToString());
 		}
 	}
 }

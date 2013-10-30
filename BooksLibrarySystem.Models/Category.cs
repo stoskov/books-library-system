@@ -16,7 +16,9 @@ namespace BooksLibrarySystem.Models
 
 		public int CategoryId { get; set; }
 
-		[MaxLength(50)]
+		[Required]
+		[Display(Name="Category Name")]
+		[MaxLength(50, ErrorMessage = "Category Name cannot be longer than 50 symbols.")]
 		public string Name { get; set; }
 
 		public virtual ICollection<Book> Books

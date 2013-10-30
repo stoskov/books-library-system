@@ -7,10 +7,9 @@
 		</div>
 
 		<div class="span12">
-
 			<asp:GridView ID="GridViewCategories" runat="server" ItemType="BooksLibrarySystem.Models.Category" CssClass="gridview"
-						  AutoGenerateColumns="False" DataKeyNames="CategoryId" PageSize="10" AllowPaging="true" AllowSorting="true"
-						  SelectMethod="GridViewCategories_GetData">
+				AutoGenerateColumns="False" DataKeyNames="CategoryId" PageSize="10" AllowPaging="true" AllowSorting="true"
+				SelectMethod="GridViewCategories_GetData">
 				<Columns>
 					<asp:TemplateField HeaderText="Category Name">
 						<ItemTemplate>
@@ -21,9 +20,9 @@
 						<ItemStyle CssClass="actions-column" />
 						<ItemTemplate>
 							<asp:LinkButton ID="LinkButtonEditCategory" runat="server" Text="Edit" CssClass="link-button"
-											OnCommand="LinkButtonEditCategory_Command" CommandName="EditCategory" CommandArgument="<%# Item.CategoryId %>" />
+								OnCommand="LinkButtonEditCategory_Command" CommandName="EditCategory" CommandArgument="<%# Item.CategoryId %>" />
 							<asp:LinkButton ID="LinkButtonDeleteCategory" runat="server" Text="Delete" CssClass="link-button"
-											OnCommand="LinkButtonDeleteCategory_Command" CommandName="DeleteCategory" CommandArgument="<%# Item.CategoryId %>" />
+								OnCommand="LinkButtonDeleteCategory_Command" CommandName="DeleteCategory" CommandArgument="<%# Item.CategoryId %>" />
 						</ItemTemplate>
 					</asp:TemplateField>
 				</Columns>
@@ -33,39 +32,55 @@
 				<asp:LinkButton runat="server" CssClass="link-button" ID="LinkButtonCreateNew" Text="Create New" OnClick="LinkButtonCreateNew_Click"></asp:LinkButton>
 			</div>
 
-			<asp:Panel runat="server" ID="PanelCreate" CssClass="panel row-fluid" Visible="false">
-				<h2>Create New Category</h2>
-				<asp:TextBox runat="server" ID="TextBox1" CssClass="span11" placeholder="Enter category name..." Text="<%#:  %>"></asp:TextBox>
-				<label class="">
-					<span>Category</span>
-					<asp:TextBox runat="server" ID="TextBoxCategoryCreate" CssClass="span11" placeholder="Enter category name..."></asp:TextBox>
-				</label>
-				<div class="pull-right">
-					<asp:LinkButton runat="server" ID="LinkButtonCreate" CssClass="link-button" Text="Create" OnClick="LinkButtonCreate_Click"></asp:LinkButton>
-					<asp:LinkButton runat="server" ID="LinkButtonCancelCreate" CssClass="link-button" Text="Cancel" OnClick="LinkButtonCancel_Click"></asp:LinkButton>
-				</div>
-			</asp:Panel>
-
-			<asp:Panel runat="server" ID="PanelDelete" CssClass="panel row-fluid" Visible="false">
-				<h2>Confirm Category Deletion?</h2>
-				<label>
-					<span>Category</span>
-					<asp:TextBox runat="server" ID="TextBoxCategoryDelete" CssClass="span11" ReadOnly="true"></asp:TextBox>
-				</label>
-				<asp:LinkButton runat="server" ID="LinkButtonDelete" CssClass="link-button" Text="Yes" OnClick="LinkButtonDelete_Click"></asp:LinkButton>
-				<asp:LinkButton runat="server" ID="LinkButtonCancelDelete" CssClass="link-button" Text="No" OnClick="LinkButtonCancel_Click"></asp:LinkButton>
-			</asp:Panel>
-
-			<asp:Panel runat="server" ID="PanelEdit" CssClass="panel row-fluid" Visible="false">
-				<h2>Edit Category</h2>
-				<label>
-					<span>Category</span>
-					<asp:TextBox runat="server" ID="TextBoxCategoryEdit" CssClass="span11" placeholder="Enter category name..."></asp:TextBox>
-				</label>
-				<asp:LinkButton runat="server" ID="LinkButtonEdit" CssClass="link-button" Text="Save" OnClick="LinkButtonEdit_Click"></asp:LinkButton>
-				<asp:LinkButton runat="server" ID="LinkButtonCancelEdit" CssClass="link-button" Text="Cancel" OnClick="LinkButtonCancel_Click"></asp:LinkButton>
-			</asp:Panel>
-
+			<asp:FormView runat="server" ID="FormViewCategory"
+				CssClass="row-fluid"
+				Visible="false"
+				SelectMethod="FormViewCategory_GetItem"
+				DeleteMethod="FormViewCategory_DeleteItem"
+				InsertMethod="FormViewCategory_InsertItem"
+				UpdateMethod="FormViewCategory_UpdateItem"
+				DataKeyNames="CategoryId"
+				ItemType="BooksLibrarySystem.Models.Category">
+				<InsertItemTemplate>
+					<div class="panel span12">
+						<h3>Create New Category</h3>
+						<label>
+							<span>Name</span>
+							<asp:TextBox ID="CategoryNameNew" runat="server" CssClass="span11" placeholder="Enter category name..." Text="<%# BindItem.Name %>"></asp:TextBox>
+						</label>
+						<div class="pull-right">
+							<asp:LinkButton runat="server" CssClass="link-button" Text="Create" CommandName="Insert"></asp:LinkButton>
+							<asp:LinkButton runat="server" CssClass="link-button" Text="Cancel" CommandName="Cancel" OnCommand="FormView_Command"></asp:LinkButton>
+						</div>
+					</div>
+				</InsertItemTemplate>
+				<EditItemTemplate>
+					<div class="panel span12">
+						<h3>Edit Category</h3>
+						<label>
+							<span>Name</span>
+							<asp:TextBox ID="CategoryNameEdit" runat="server" CssClass="span11" placeholder="Enter category name..." Text="<%# BindItem.Name %>"></asp:TextBox>
+						</label>
+						<div class="pull-right">
+							<asp:LinkButton runat="server" CssClass="link-button" Text="Save" CommandName="Update"></asp:LinkButton>
+							<asp:LinkButton runat="server" CssClass="link-button" Text="Cancel" CommandName="Cancel" OnCommand="FormView_Command"></asp:LinkButton>
+						</div>
+					</div>
+				</EditItemTemplate>
+				<ItemTemplate>
+					<div class="panel span12">
+						<h3>Confirm Category Deletion?</h3>
+						<label>
+							<span>Name</span>
+							<asp:TextBox ID="CategoryNameDelete" runat="server" CssClass="span11" placeholder="Enter category name..." Text="<%# BindItem.Name %>" Enabled="False"></asp:TextBox>
+						</label>
+						<div class="pull-right">
+							<asp:LinkButton runat="server" CssClass="link-button" Text="Yes" CommandName="Delete"></asp:LinkButton>
+							<asp:LinkButton runat="server" CssClass="link-button" Text="Cancel" CommandName="Cancel" OnCommand="FormView_Command"></asp:LinkButton>
+						</div>
+					</div>
+				</ItemTemplate>
+			</asp:FormView>
 		</div>
 	</div>
 

@@ -20,5 +20,7 @@ namespace BooksLibrarySystem.Data.Repositories
 		void Delete(int id);
 
 		void Detach(T entity);
+
+		void Reload(T entry);
 	}
 }

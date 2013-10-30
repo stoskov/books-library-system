@@ -6,9 +6,11 @@
 //     the code is regenerated. 
 // </auto-generated>
 //------------------------------------------------------------------------------
-namespace BooksLibrarySystem.Web
-{
-	public partial class Categories {
+
+namespace BooksLibrarySystem.Web {
+    
+    
+    public partial class Categories {
         
         /// <summary>
         /// GridViewCategories control.
@@ -29,111 +31,12 @@ namespace BooksLibrarySystem.Web
         protected global::System.Web.UI.WebControls.LinkButton LinkButtonCreateNew;
         
         /// <summary>
-        /// PanelCreate control.
+        /// FormViewCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelCreate;
-        
-        /// <summary>
-        /// TextBoxCategoryCreate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxCategoryCreate;
-        
-        /// <summary>
-        /// LinkButtonCreate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButtonCreate;
-        
-        /// <summary>
-        /// LinkButtonCancelCreate control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButtonCancelCreate;
-        
-        /// <summary>
-        /// PanelDelete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelDelete;
-        
-        /// <summary>
-        /// TextBoxCategoryDelete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxCategoryDelete;
-        
-        /// <summary>
-        /// LinkButtonDelete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButtonDelete;
-        
-        /// <summary>
-        /// LinkButtonCancelDelete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButtonCancelDelete;
-        
-        /// <summary>
-        /// PanelEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelEdit;
-        
-        /// <summary>
-        /// TextBoxCategoryEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxCategoryEdit;
-        
-        /// <summary>
-        /// LinkButtonEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButtonEdit;
-        
-        /// <summary>
-        /// LinkButtonCancelEdit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButtonCancelEdit;
+        protected global::System.Web.UI.WebControls.FormView FormViewCategory;
     }
 }

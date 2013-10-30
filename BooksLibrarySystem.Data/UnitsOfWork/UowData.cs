@@ -28,12 +28,12 @@ namespace BooksLibrarySystem.Data.UnitsOfWork
 		{
 			return this.context.SaveChanges();
 		}
-  
+
 		public void Dispose()
 		{
 			this.context.Dispose();
 		}
-  
+
 		public IRepository<Category> Categories
 		{
 			get
@@ -41,7 +41,7 @@ namespace BooksLibrarySystem.Data.UnitsOfWork
 				return this.GetRepository<Category>();
 			}
 		}
-  
+
 		public IRepository<Book> Books
 		{
 			get
@@ -49,7 +49,7 @@ namespace BooksLibrarySystem.Data.UnitsOfWork
 				return this.GetRepository<Book>();
 			}
 		}
-  
+
 		private IRepository<T> GetRepository<T>() where T : class
 		{
 			if (!this.repositories.ContainsKey(typeof(T)))

@@ -96,5 +96,11 @@ namespace BooksLibrarySystem.Data.Repositories
 
 			entry.State = EntityState.Detached;
 		}
+
+
+		public void Reload(T entry)
+		{
+			this.Context.Entry(entry).Reload();
+		}
 	}
 }
