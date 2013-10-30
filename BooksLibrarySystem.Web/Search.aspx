@@ -3,13 +3,12 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 	<div class="row">
 		<div class="span12">
-			<asp:Panel  runat="server" CssClass="input-append" DefaultButton="LinkButtonSearch">
+			<asp:Panel runat="server" CssClass="input-append" DefaultButton="LinkButtonSearch">
 				<asp:TextBox runat="server" ID="TextBoxSearch" CssClass="span11" placeholder="Search by book title / author / description..."></asp:TextBox>
 				<asp:LinkButton runat="server" CssClass="btn" Text="Search" ID="LinkButtonSearch" OnClick="LinkButtonSearch_Click"></asp:LinkButton>
 			</asp:Panel>
 		</div>
-		<h4 class="span12">
-			Result (<%: this.ResultCount %>):
+		<h4 class="span12">Result (<%: this.ResultCount %>):
 		</h4>
 		<div class="span12 search-result">
 
@@ -22,14 +21,15 @@
 				<ItemTemplate>
 					<li class="search-result result-item">
 						<div>
-							<a class="block" href='BookDetails?id=<%#:Item.BookId %>'>
-								Title: <%#: Item.Title %>
-							</a>
-							<a class="block" href='CategoryDetails?id=<%#:Item.CategoryId %>'>
-								Category: <%#: Item.CategoryName %>
+							<a class="search main-link" href='BookDetails?id=<%#:Item.BookId %>'>Title: <%#: Item.Title %>
 							</a>
 						</div>
-						<span class="muted">Authors: <%#: Item.Authors %></span>
+						<div>
+							<a class="search sub-link" href='CategoryDetails?id=<%#:Item.CategoryId %>'>Category: <%#: Item.CategoryName %>
+							</a>
+						</div>
+						<div class="block muted">Authors: <%#: Item.Authors %></div>
+						<div class="block muted">Description: <%#: this.ShortenText(Item.Description, 100)%></div>
 					</li>
 				</ItemTemplate>
 			</asp:ListView>
@@ -43,7 +43,7 @@
 	<div class="btn-group">
 		<asp:DataPager runat="server" PagedControlID="ResultView" PageSize="10" QueryStringField="page">
 			<Fields>
-				<asp:NextPreviousPagerField 
+				<asp:NextPreviousPagerField
 					FirstPageText="<<"
 					LastPageText=">>"
 					PreviousPageText="<"
@@ -53,7 +53,7 @@
 					ShowFirstPageButton="true"
 					ShowLastPageButton="true"
 					ShowPreviousPageButton="true"
-					ShowNextPageButton="true"/>
+					ShowNextPageButton="true" />
 
 			</Fields>
 		</asp:DataPager>

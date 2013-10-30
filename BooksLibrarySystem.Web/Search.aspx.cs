@@ -45,6 +45,7 @@ namespace BooksLibrarySystem.Web
 									   CategoryId = b.CategoryId,
 									   CategoryName = b.Category.Name,
 									   Authors = b.Authors,
+									   Description = b.Description,
 									   Title = b.Title,
 									   Relevance = this.CalcualteRelecance(b, query)
 								   })

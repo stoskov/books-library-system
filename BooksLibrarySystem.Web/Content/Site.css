@@ -126,3 +126,7 @@ ul li {
 .actions-column {
 	width: 110px;
 }
+
+.search.main-link {
+	font-weight: bold;
+}
