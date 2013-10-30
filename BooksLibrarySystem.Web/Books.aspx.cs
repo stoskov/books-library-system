@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
+using System.Web.ModelBinding;
 using System.Web.UI.WebControls;
 using BooksLibrarySystem.Models;
+using BooksLibrarySystem.Web.Controls.ErrorSuccessNotifier;
 
 namespace BooksLibrarySystem.Web.Admin
 {
 	public partial class Books : BooksLibrarySystemPage
 	{
-		private const int MaxLabelLength = 20;
-		private const string ShortenLabelSymbols = "...";
+		private const string MessageBookUpdated = "Book successfully updated";
+		private const string MessageBookCreated = "Book successfully created";
+		private const string MessageBookDeleted = "Book successfully deleted";
 
 		private int? currentBookId;
 
@@ -20,7 +24,10 @@ namespace BooksLibrarySystem.Web.Admin
 
 		protected void Page_PreRender(object sender, EventArgs e)
 		{
-			this.DataBind();
+			if (this.IsFormValid())
+			{
+				this.DataBind();
+			}
 		}
 
 		public IQueryable<Book> GridViewBooks_GetData()
@@ -38,32 +45,68 @@ namespace BooksLibrarySystem.Web.Admin
 			this.OpenCreateMode();
 		}
 
-		protected void LinkButtonCreate_Click(object sender, EventArgs e)
+		public BooksLibrarySystem.Models.Book FormViewBook_GetItem([ViewState("currentBookId")]
+			int? id)
 		{
-			string title = this.TextBoxBookCreateTitle.Text;
-			string authors = this.TextBoxBookCreateAuthors.Text;
-			string isbn = this.TextBoxBookCreateISBN.Text;
-			string webSite = this.TextBoxBookCreateWebSite.Text;
-			string description = this.TextTextBoxBookCreateDescription.Text;
-			int categoryId = Convert.ToInt32(this.DropDownListBookCreateCategory.SelectedValue);
-
-			if (this.ValidateBookTitle(title) | this.ValidateBookAuthors(authors))
+			if (id == null)
 			{
-				Book book = new Book()
-				{
-					Title = title,
-					CategoryId = categoryId,
-					Authors = authors,
-					ISBN = isbn,
-					WebSite = webSite,
-					Description = description
-				};
-
-				this.data.Books.Add(book);
-				this.data.SaveChanges();
-
-				this.CloseAllModes();
+				return null;
 			}
+
+			return this.data.Books.GetById((int)id);
+		}
+
+		public void FormViewBook_DeleteItem([ViewState("currentBookId")]
+			int id)
+		{
+			this.data.Books.Delete(id);
+			this.data.SaveChanges();
+			ErrorSuccessNotifier.AddSuccessMessage(MessageBookDeleted);
+		}
+
+		public void FormViewBook_UpdateItem([ViewState("currentBookId")]
+			int id)
+		{
+			var book = this.data.Books.GetById(id);
+			this.TryUpdateModel(book);
+
+			if (!this.ModelState.IsValid)
+			{
+				this.SetFormValidity(false);
+				this.DisplayErrorMessage();
+				return;
+			}
+			else
+			{
+				this.SetFormValidity(true);
+			}
+
+			this.data.Books.Update(book);
+			this.data.SaveChanges();
+			this.CloseForm();
+			ErrorSuccessNotifier.AddSuccessMessage(MessageBookUpdated);
+		}
+
+		public void FormViewBook_InsertItem()
+		{
+			var book = new Book();
+			this.TryUpdateModel(book);
+
+			if (!this.ModelState.IsValid)
+			{
+				this.SetFormValidity(false);
+				this.DisplayErrorMessage();
+				return;
+			}
+			else
+			{
+				this.SetFormValidity(true);
+			}
+
+			this.data.Books.Add(book);
+			this.data.SaveChanges();
+			this.CloseForm();
+			ErrorSuccessNotifier.AddSuccessMessage(MessageBookCreated);
 		}
 
 		protected void LinkButtonEditBook_Command(object sender, CommandEventArgs e)
@@ -73,50 +116,58 @@ namespace BooksLibrarySystem.Web.Admin
 			this.OpenEditMode();
 		}
 
-		protected void LinkButtonEdit_Click(object sender, EventArgs e)
-		{
-			string title = this.TextBoxBookEditTitle.Text;
-			string authors = this.TextBoxBookEditAuthors.Text;
-			string isbn = this.TextBoxBookEditISBN.Text;
-			string webSite = this.TextBoxBookEditWebSite.Text;
-			string description = this.TextTextBoxBookEditDescription.Text;
-			int categoryId = Convert.ToInt32(this.DropDownListBookEditCategory.SelectedValue);
-
-			if (this.ValidateBookTitle(title) | this.ValidateBookAuthors(authors))
-			{
-				Book book = this.data.Books.GetById((int)this.currentBookId);
-				book.Title = title;
-				book.CategoryId = categoryId;
-				book.Authors = authors;
-				book.ISBN = isbn;
-				book.WebSite = webSite;
-				book.Description = description;
-
-				this.data.Books.Update(book);
-				this.data.SaveChanges();
-
-				this.CloseAllModes();
-			}
-		}
-
 		protected void LinkButtonDeleteBook_Command(object sender, CommandEventArgs e)
 		{
 			int bookId = Convert.ToInt32(e.CommandArgument);
 			this.SetBookId(bookId);
-			this.OpenDeleteMode();
+			this.OpenReadMode();
 		}
 
-		protected void LinkButtonDelete_Click(object sender, EventArgs e)
+		protected void FormView_Command(object sender, CommandEventArgs e)
 		{
-			this.data.Books.Delete((int)this.currentBookId);
-			this.data.SaveChanges();
-
-			this.CloseAllModes();
+			this.CloseForm();
 		}
 
-		protected void LinkButtonCancel_Click(object sender, EventArgs e)
+		private void OpenCreateMode()
 		{
-			this.CloseAllModes();
+			this.FormViewBook.Visible = true;
+			this.FormViewBook.ChangeMode(FormViewMode.Insert);
+		}
+
+		private void OpenReadMode()
+		{
+			this.FormViewBook.Visible = true;
+			this.FormViewBook.ChangeMode(FormViewMode.ReadOnly);
+		}
+
+		private void OpenEditMode()
+		{
+			this.FormViewBook.Visible = true;
+			this.FormViewBook.ChangeMode(FormViewMode.Edit);
+		}
+
+		private void CloseForm()
+		{
+			this.FormViewBook.Visible = false;
+		}
+
+		private void DisplayErrorMessage()
+		{
+			var errorList = this.ModelState.Values
+								.SelectMany(m => m.Errors)
+								.Select(e => e.ErrorMessage)
+								.ToList();
+
+			var errors = new StringBuilder();
+			errorList.ForEach(err => errors.AppendLine(err.ToString()));
+
+			ErrorSuccessNotifier.AddErrorMessage(errors.ToString());
+		}
+
+		private void SetBookId(int id)
+		{
+			this.currentBookId = id;
+			this.ViewState["currentBookId"] = id;
 		}
 
 		private void HideUnauthorizedWidgets()
@@ -133,90 +184,16 @@ namespace BooksLibrarySystem.Web.Admin
 			}
 		}
 
-		private void OpenCreateMode()
+		private void SetFormValidity(bool isValid)
 		{
-			this.LinkButtonCreateNew.Visible = false;
-			this.PanelCreate.Visible = true;
-			this.PanelDelete.Visible = false;
-			this.PanelEdit.Visible = false;
+			this.ViewState["isFormValid"] = isValid;
 		}
 
-		private void OpenDeleteMode()
+		private bool IsFormValid()
 		{
-			this.LinkButtonCreateNew.Visible = false;
-			this.PanelCreate.Visible = false;
-			this.PanelDelete.Visible = true;
-			this.PanelEdit.Visible = false;
-			this.PopulateBookData();
-		}
-
-		private void OpenEditMode()
-		{
-			this.LinkButtonCreateNew.Visible = false;
-			this.PanelCreate.Visible = false;
-			this.PanelDelete.Visible = false;
-			this.PanelEdit.Visible = true;
-			this.PopulateBookData();
-		}
-
-		private void CloseAllModes()
-		{
-			this.LinkButtonCreateNew.Visible = true;
-			this.PanelCreate.Visible = false;
-			this.PanelDelete.Visible = false;
-			this.PanelEdit.Visible = false;
-
-			this.TextBoxBookEditTitle.Text = string.Empty;
-			this.TextBoxBookEditAuthors.Text = string.Empty;
-			this.TextBoxBookEditISBN.Text = string.Empty;
-			this.TextBoxBookEditWebSite.Text = string.Empty;
-			this.TextTextBoxBookEditDescription.Text = string.Empty;
-			this.TextBoxBookCreateTitle.Text = string.Empty;
-			this.TextBoxBookCreateAuthors.Text = string.Empty;
-			this.TextBoxBookCreateISBN.Text = string.Empty;
-			this.TextBoxBookCreateWebSite.Text = string.Empty;
-			this.TextTextBoxBookCreateDescription.Text = string.Empty;
-			this.TextTextBoxBookDeleteTitle.Text = string.Empty;
-		}
-
-		private void PopulateBookData()
-		{
-			if (this.currentBookId != null)
+			var isValid = this.ViewState["isFormValid"];
+			if (isValid != null && (bool)isValid == false)
 			{
-				Book book = this.data.Books.GetById((int)this.currentBookId);
-
-				this.TextBoxBookEditTitle.Text = book.Title;
-				this.TextBoxBookEditAuthors.Text = book.Authors;
-				this.TextBoxBookEditISBN.Text = book.ISBN;
-				this.TextBoxBookEditWebSite.Text = book.WebSite;
-				this.TextTextBoxBookEditDescription.Text = book.Description;
-				this.DropDownListBookEditCategory.SelectedValue = book.CategoryId.ToString();
-				this.TextTextBoxBookDeleteTitle.Text = book.Title;
-			}
-		}
-
-		private void SetBookId(int id)
-		{
-			this.currentBookId = id;
-			this.ViewState["currentBookId"] = id;
-		}
-
-		private bool ValidateBookTitle(string bookTitle)
-		{
-			if (string.IsNullOrEmpty(bookTitle))
-			{
-				BooksLibrarySystem.Web.Controls.ErrorSuccessNotifier.ErrorSuccessNotifier.AddErrorMessage("Book title can not be empty");
-				return false;
-			}
-
-			return true;
-		}
-
-		private bool ValidateBookAuthors(string bookAthors)
-		{
-			if (string.IsNullOrEmpty(bookAthors))
-			{
-				BooksLibrarySystem.Web.Controls.ErrorSuccessNotifier.ErrorSuccessNotifier.AddErrorMessage("Book author(s) can not be empty");
 				return false;
 			}
 

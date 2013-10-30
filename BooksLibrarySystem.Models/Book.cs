@@ -8,21 +8,28 @@ namespace BooksLibrarySystem.Models
 	{
 		public int BookId { get; set; }
 
-		[MaxLength(100)]
+		[Required]
+		[Display(Name="Book Title")]
+		[MaxLength(100, ErrorMessage="Book Title cannot be longer than 100 symbols.")]
 		public string Title { get; set; }
 
-		[MaxLength(100)]
+		[Required]
+		[Display(Name = "Authors")]
+		[MaxLength(100, ErrorMessage = "Authors cannot be longer than 100 symbols.")]
 		public string Authors { get; set; }
 
-		[MaxLength(20)]
+		[Display(Name = "ISBN")]
+		[MaxLength(20, ErrorMessage = "ISBN cannot be longer than 100 symbols.")]
 		public string ISBN { get; set; }
 
-		[MaxLength(100)]
+		[Display(Name = "Web Site")]
+		[MaxLength(256, ErrorMessage = "Web Site cannot be longer than 256 symbols.")]
 		public string WebSite { get; set; }
 
 		public int CategoryId { get; set; }
 
-		[MaxLength(500)]
+		[Display(Name = "Book Description")]
+		[MaxLength(1000, ErrorMessage = "Book Description cannot be longer than 1000 symbols.")]
 		public string Description { get; set; }
 
 		public virtual Category Category { get; set; }
