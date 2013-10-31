@@ -14,7 +14,7 @@
 				<Columns>
 					<asp:TemplateField SortExpression="Title" HeaderText="Title">
 						<ItemTemplate>
-							<a class="block" href='BookDetails?id=<%#:Item.BookId %>'>
+							<a class="block"href="<%# GetRouteUrl("BookDetails", new {ID = Item.BookId})%>">
 								<%#:  Item.Title%>
 							</a>
 						</ItemTemplate>
@@ -26,7 +26,7 @@
 					</asp:TemplateField>
 					<asp:TemplateField HeaderText="Category">
 						<ItemTemplate>
-							<a href='CategoryDetails?id=<%#: Item.Category.CategoryId %>'><%#:  Item.Category.Name %></a>
+							<a href="<%# GetRouteUrl("CategoryDetails", new {ID = Item.CategoryId})%>"><%#:  Item.Category.Name %></a>
 						</ItemTemplate>
 					</asp:TemplateField>
 					<asp:TemplateField HeaderText="Action">

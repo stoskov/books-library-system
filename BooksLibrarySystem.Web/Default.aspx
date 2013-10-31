@@ -31,9 +31,9 @@
 			<div class="span4">
 
 				<h4>
-					<a class="block" href='CategoryDetails?id=<%#:Item.CategoryId %>'>
+					<a href="<%# GetRouteUrl("CategoryDetails", new {ID = Item.CategoryId})%>">
 						<asp:Literal Mode="Encode" runat="server" Text='<%# Item.Name %> '></asp:Literal>
-						<asp:Literal ID="Literal1" Mode="Encode" runat="server" Text='<%# "(" +  Item.TotalBooksCount + " books)" %>'></asp:Literal>
+						<asp:Literal Mode="Encode" runat="server" Text='<%# "(" +  Item.TotalBooksCount + " books)" %>'></asp:Literal>
 					</a>
 				</h4>
 
@@ -44,16 +44,13 @@
 						</ul>
 					</LayoutTemplate>
 					<ItemTemplate>
-
 						<li>
-							<a class="block" href='BookDetails?id=<%#:Item.BookId %>'>
-							<%#: Item.Title %>
+							<a href="<%# GetRouteUrl("BookDetails", new {ID = Item.BookId})%>">
+								<%#: Item.Title %>
 							</a>
 							<em class="muted">by <%#: Item.Authors %></em>
 							<em class="muted">by <%#: Container.DisplayIndex%></em>
-
 						</li>
-
 					</ItemTemplate>
 					<EmptyDataTemplate>
 						<i>No books in this category.</i>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using BooksLibrarySystem.Models;
+using BooksLibrarySystem.Web.Controls.ErrorSuccessNotifier;
 
 namespace BooksLibrarySystem.Web
 {
@@ -18,9 +19,21 @@ namespace BooksLibrarySystem.Web
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			int bookId = Convert.ToInt32(this.Request.QueryString["id"]);
+			int bookId;
+
+			if (!int.TryParse(this.RouteData.Values["id"].ToString(), out bookId))
+			{
+				ErrorSuccessNotifier.AddErrorMessage("Missing book id or book id is not a number");
+				return;
+			}
 
 			Book book = this.data.Books.GetById(bookId);
+
+			if (book == null)
+			{
+				ErrorSuccessNotifier.AddErrorMessage("Worng book id!");
+				return;
+			}
 
 			if (book == null)
 			{

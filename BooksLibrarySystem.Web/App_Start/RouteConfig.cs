@@ -11,6 +11,16 @@ namespace BooksLibrarySystem.Web.App_Start
 			var settings = new FriendlyUrlSettings();
 			settings.AutoRedirectMode = RedirectMode.Permanent;
 			routes.EnableFriendlyUrls(settings);
+
+			routes.MapPageRoute(
+				"CategoryDetails", "Category/{id}", "~/CategoryDetails.aspx", true,
+				new RouteValueDictionary() { { "id", "" } },
+				new RouteValueDictionary() { { "id", "[0-9]{0,}" } });
+
+			routes.MapPageRoute(
+				"BookDetails", "Book/{id}", "~/BookDetails.aspx", true,
+				new RouteValueDictionary() { { "id", "" } },
+				new RouteValueDictionary() { { "id", "[0-9]{0,}" } });
 		}
 	}
 }

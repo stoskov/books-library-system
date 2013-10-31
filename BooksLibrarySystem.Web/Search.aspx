@@ -21,11 +21,11 @@
 				<ItemTemplate>
 					<li class="search-result result-item">
 						<div>
-							<a class="search main-link" href='BookDetails?id=<%#:Item.BookId %>'>Title: <%#: Item.Title %>
+							<a class="search main-link" href="<%# GetRouteUrl("BookDetails", new {ID = Item.BookId})%>">Title: <%#: Item.Title %>
 							</a>
 						</div>
 						<div>
-							<a class="search sub-link" href='CategoryDetails?id=<%#:Item.CategoryId %>'>Category: <%#: Item.CategoryName %>
+							<a class="search sub-link" href="<%# GetRouteUrl("CategoryDetails", new {ID = Item.CategoryId})%>">Category: <%#: Item.CategoryName %>
 							</a>
 						</div>
 						<div class="block muted">Authors: <%#: Item.Authors %></div>

@@ -7,17 +7,20 @@
 		<p class="book-title"><%: this.Book.Title %></p>
 		<p>
 			<strong>Category:</strong>
-			<span class="book-info">
-				<a href='CategoryDetails?id=<%: this.Book.Category.CategoryId %>'><%: this.Book.Category.Name %></a>
-			</span>
+			<% if (this.Book.Category != null)
+			{%>
+				<span class="book-info">
+					<a href="<%= this.GetRouteUrl("CategoryDetails", new { ID = this.Book.Category.CategoryId })%>"><%: this.Book.Category.Name %></a>
+				</span>
+			<%}%>
 		</p>
 		<p>
 			<strong>Authors:</strong>
-			<span class="book-info"> <%: this.Book.Authors %></span>
+			<span class="book-info"><%: this.Book.Authors %></span>
 		</p>
 		<p>
 			<strong>ISBN:</strong>
-			<span class="book-info"> <%: this.Book.ISBN %></span>
+			<span class="book-info"><%: this.Book.ISBN %></span>
 		</p>
 		<p>
 			<strong>Web site:</strong>

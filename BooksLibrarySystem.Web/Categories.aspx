@@ -13,7 +13,7 @@
 				<Columns>
 					<asp:TemplateField HeaderText="Category Name">
 						<ItemTemplate>
-							<a href='CategoryDetails?id=<%#: Item.CategoryId %>'><%#: Item.Name %></a>
+							<a href="<%# GetRouteUrl("CategoryDetails", new {ID = Item.CategoryId})%>"><%#: Item.Name %></a>
 						</ItemTemplate>
 					</asp:TemplateField>
 					<asp:TemplateField HeaderText="Action">

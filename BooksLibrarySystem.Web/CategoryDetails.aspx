@@ -16,7 +16,7 @@
 		<Columns>
 			<asp:TemplateField SortExpression="Title" HeaderText="Title">
 				<ItemTemplate>
-					<a class="block" href='BookDetails?id=<%#:Item.BookId %>'>
+					<a class="" href="<%# GetRouteUrl("BookDetails", new {ID = Item.BookId})%>">
 					<%#:  Item.Title %>
 					</a>
 				</ItemTemplate>
