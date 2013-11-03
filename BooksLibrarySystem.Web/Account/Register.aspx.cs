@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using BooksLibrarySystem.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -13,7 +14,7 @@ namespace BooksLibrarySystem.Web.Account
 		protected void CreateUser_Click(object sender, EventArgs e)
 		{
 			string userName = this.UserName.Text;
-			var manager = new AuthenticationIdentityManager(new IdentityStore());
+			var manager = new AuthenticationIdentityManager(new IdentityStore(new BooksLibrarySystemContext()));
 			User u = new User(userName) { UserName = userName };
 			IdentityResult result = manager.Users.CreateLocalUser(u, this.Password.Text);
 			if (result.Success) 

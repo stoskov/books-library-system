@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Web;
+using BooksLibrarySystem.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -43,7 +44,7 @@ namespace BooksLibrarySystem.Web.Account
 			}
 			if (!this.IsPostBack)
 			{
-				IAuthenticationManager manager = new AuthenticationIdentityManager(new IdentityStore()).Authentication;
+				IAuthenticationManager manager = new AuthenticationIdentityManager(new IdentityStore(new BooksLibrarySystemContext())).Authentication;
 				var auth = this.Context.GetOwinContext().Authentication;
 				ClaimsIdentity id = manager.GetExternalIdentity(auth);
 				IdentityResult result = manager.SignInExternalIdentity(auth, id);
@@ -83,7 +84,7 @@ namespace BooksLibrarySystem.Web.Account
 				return;
 			}
 			var user = new User(this.userName.Text);
-			IAuthenticationManager manager = new AuthenticationIdentityManager(new IdentityStore()).Authentication;
+			IAuthenticationManager manager = new AuthenticationIdentityManager(new IdentityStore(new BooksLibrarySystemContext())).Authentication;
 			IdentityResult result = manager.CreateAndSignInExternalUser(this.Context.GetOwinContext().Authentication, user);
 			if (result.Success)
 			{

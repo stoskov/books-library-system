@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BooksLibrarySystem.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -17,7 +18,7 @@ namespace BooksLibrarySystem.Web.Account
 			if (!this.IsPostBack)
 			{
 				// Determine the sections to render
-				ILoginManager manager = new IdentityManager(new IdentityStore()).Logins;
+				ILoginManager manager = new IdentityManager(new IdentityStore(new BooksLibrarySystemContext())).Logins;
 				if (manager.HasLocalLogin(this.User.Identity.GetUserId())) 
 				{
 					this.changePasswordHolder.Visible = true;
@@ -50,7 +51,7 @@ namespace BooksLibrarySystem.Web.Account
 		{
 			if (this.IsValid)
 			{
-				IPasswordManager manager = new IdentityManager(new IdentityStore()).Passwords;
+				IPasswordManager manager = new IdentityManager(new IdentityStore(new BooksLibrarySystemContext())).Passwords;
 				IdentityResult result = manager.ChangePassword(this.User.Identity.GetUserName(), this.CurrentPassword.Text, this.NewPassword.Text);
 				if (result.Success) 
 				{
@@ -68,7 +69,7 @@ namespace BooksLibrarySystem.Web.Account
 			if (this.IsValid)
 			{
 				// Create the local login info and link the local account to the user
-				ILoginManager manager = new IdentityManager(new IdentityStore()).Logins;
+				ILoginManager manager = new IdentityManager(new IdentityStore(new BooksLibrarySystemContext())).Logins;
 				IdentityResult result = manager.AddLocalLogin(this.User.Identity.GetUserId(), this.User.Identity.GetUserName(), this.password.Text);
 				if (result.Success) 
 				{
@@ -83,7 +84,7 @@ namespace BooksLibrarySystem.Web.Account
 
 		public IEnumerable<IUserLogin> GetLogins()
 		{
-			ILoginManager manager = new IdentityManager(new IdentityStore()).Logins;
+			ILoginManager manager = new IdentityManager(new IdentityStore(new BooksLibrarySystemContext())).Logins;
 			var accounts = manager.GetLogins(this.User.Identity.GetUserId());
 			this.CanRemoveExternalLogins = accounts.Count() > 1;
 			return accounts;
@@ -91,7 +92,7 @@ namespace BooksLibrarySystem.Web.Account
 
 		public void RemoveLogin(string loginProvider, string providerKey)
 		{
-			ILoginManager manager = new IdentityManager(new IdentityStore()).Logins;
+			ILoginManager manager = new IdentityManager(new IdentityStore(new BooksLibrarySystemContext())).Logins;
 			var result = manager.RemoveLogin(this.User.Identity.GetUserId(), loginProvider, providerKey);
 			var msg = result.Success
 					  ? "?m=RemoveLoginSuccess"
