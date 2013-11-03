@@ -66,16 +66,28 @@ namespace BooksLibrarySystem.Web
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
-			var loginLink = (HtmlAnchor)this.LoginView.Controls[0].FindControl("loginLink");      
+			string returnUrl;
+
+			if (this.Request.QueryString["ReturnUrl"] != null)
+			{
+				returnUrl = HttpUtility.UrlEncode(this.Request.QueryString["ReturnUrl"]);
+			}
+			else
+			{
+				returnUrl = HttpUtility.UrlEncode(this.Request.Url.PathAndQuery);
+
+			}
+
+			var loginLink = (HtmlAnchor)this.LoginView.Controls[0].FindControl("loginLink");
 			if (loginLink != null)
 			{
-				loginLink.HRef += "?ReturnUrl=" + HttpUtility.UrlEncode(this.Request.Url.AbsoluteUri);
+				loginLink.HRef += "?ReturnUrl=" + returnUrl;
 			}
 
 			var registerLink = (HtmlAnchor)this.LoginView.Controls[0].FindControl("registerLink");
 			if (registerLink != null)
 			{
-				registerLink.HRef += "?ReturnUrl=" + HttpUtility.UrlEncode(this.Request.Url.AbsoluteUri);
+				registerLink.HRef += "?ReturnUrl=" + returnUrl;
 			}
 		}
 
