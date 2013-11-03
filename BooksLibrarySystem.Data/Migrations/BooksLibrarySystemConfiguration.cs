@@ -7,15 +7,15 @@ namespace BooksLibrarySystem.Data.Migrations
 	using BooksLibrarySystem.Data;
 	using BooksLibrarySystem.Models;
 
-	public sealed class LibrarySystemConfiguration : DbMigrationsConfiguration<LibrarySystemContext>
+	public sealed class BooksLibrarySystemConfiguration : DbMigrationsConfiguration<BooksLibrarySystemContext>
 	{
-		public LibrarySystemConfiguration()
+		public BooksLibrarySystemConfiguration()
 		{
 			this.AutomaticMigrationsEnabled = true;
 			this.AutomaticMigrationDataLossAllowed = true;
 		}
 
-		protected override void Seed(LibrarySystemContext context)
+		protected override void Seed(BooksLibrarySystemContext context)
 		{
 			if (context.Categories.Count() > 0)
 			{

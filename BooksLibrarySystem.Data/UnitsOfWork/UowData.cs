@@ -15,7 +15,7 @@ namespace BooksLibrarySystem.Data.UnitsOfWork
 		private readonly Dictionary<Type, object> repositories = new Dictionary<Type, object>();
 
 		public UowData()
-			: this(new LibrarySystemContext())
+			: this(new BooksLibrarySystemContext())
 		{
 		}
 

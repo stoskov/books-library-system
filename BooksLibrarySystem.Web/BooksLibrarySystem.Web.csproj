@@ -176,7 +176,6 @@
     <Content Include="img\glyphicons-halflings.png" />
     <Content Include="packages.config" />
     <Content Include="Account\Web.config" />
-    <Content Include="Admin\Web.config" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -210,7 +209,9 @@
     <Content Include="Global.asax" />
     <Content Include="Search.aspx" />
     <Content Include="Site.Master" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Bundle.config" />
   </ItemGroup>
   <ItemGroup>

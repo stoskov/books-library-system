@@ -8,7 +8,7 @@ namespace BooksLibrarySystem.Data.Repositories
 	public class GenericRepository<T> : IRepository<T> where T : class
 	{
 		public GenericRepository()
-			: this(new LibrarySystemContext())
+			: this(new BooksLibrarySystemContext())
 		{
 		}
 

@@ -17,7 +17,7 @@ namespace BooksLibrarySystem.Web
 			// Code that runs on application startup
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
-			Database.SetInitializer(new MigrateDatabaseToLatestVersion<LibrarySystemContext, LibrarySystemConfiguration>());
+			Database.SetInitializer(new MigrateDatabaseToLatestVersion<BooksLibrarySystemContext, BooksLibrarySystemConfiguration>());
 		}
 	}
 }

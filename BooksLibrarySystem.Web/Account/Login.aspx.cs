@@ -26,7 +26,7 @@ namespace BooksLibrarySystem.Web.Account
 			if (this.IsValid)
 			{
 				// Validate the user password
-				IAuthenticationManager manager = new AuthenticationIdentityManager(new IdentityStore()).Authentication;
+				IAuthenticationManager manager = new AuthenticationIdentityManager(new IdentityStore(new Boo)).Authentication;
 				IdentityResult result = manager.CheckPasswordAndSignIn(this.Context.GetOwinContext().Authentication, this.UserName.Text, this.Password.Text, this.RememberMe.Checked);
 				if (result.Success)
 				{

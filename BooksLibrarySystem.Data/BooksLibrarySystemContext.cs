@@ -6,13 +6,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BooksLibrarySystem.Data
 {
-	public class LibrarySystemContext : IdentityDbContext<ApplicationUser, UserClaim, UserSecret, UserLogin, Role, UserRole, Token, UserManagement> 
+	public class BooksLibrarySystemContext : IdentityDbContext<ApplicationUser, UserClaim, UserSecret, UserLogin, Role, UserRole, Token, UserManagement> 
 	{
 		public IDbSet<Category> Categories { get; set; }
   
 		public IDbSet<Book> Books { get; set; }
   
-		public LibrarySystemContext()
+		public BooksLibrarySystemContext()
 			: base("BooksLibrarySystem")
 		{
 		}
