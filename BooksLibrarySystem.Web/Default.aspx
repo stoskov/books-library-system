@@ -48,8 +48,7 @@
 							<a href="<%# GetRouteUrl("BookDetails", new {ID = Item.BookId})%>">
 								<%#: Item.Title %>
 							</a>
-							<em class="muted">by <%#: Item.Authors %></em>
-							<em class="muted">by <%#: Container.DisplayIndex%></em>
+							<em class="muted block">by <%#: Item.Authors %></em>
 						</li>
 					</ItemTemplate>
 					<EmptyDataTemplate>

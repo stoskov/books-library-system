@@ -20,8 +20,8 @@ namespace BooksLibrarySystem.Web
 												  Authors = b.Authors,
 												  BookId = b.BookId,
 												  Title = b.Title
-											  }).Take(50).ToList()
-								 }).Take(90).ToList();
+											  }).Take(10).ToList()
+								 }).Take(6).ToList();
 
 			this.ListViewCategories.DataSource = allCategories;
 			this.DataBind();
